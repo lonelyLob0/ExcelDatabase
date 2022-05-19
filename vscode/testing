@@ -1,0 +1,12 @@
+
+
+        Dim dataBaseWorksheet As Worksheet: Set dataBaseWorksheet = Worksheets("Data")
+        
+        Dim test As Interger : test = dataBaseWorksheet.Rows.Count
+
+        'Dim lastRowIndex As Integer: lastRowIndex = dataBaseWorksheet.Range("A" & dataBaseWorksheet.Rows.Count).End(xlUp).Row
+       
+        
+        'Dim LastCell As Range: Set LastCell = dataBaseWorksheet.Cells.Find("*", SearchOrder:=xlByRows, SearchDirection:=xlPrevious)
+
+ 

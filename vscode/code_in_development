@@ -1,0 +1,63 @@
+Private Sub btnQuit_Click()
+    frmAddRecordForm.Hide
+End Sub
+
+Private Sub AddRecord()
+
+    Dim dataBaseWorksheet As Worksheet: Set dataBaseWorksheet = Worksheets("Data")
+
+    Dim lastRowIndex As Integer: lastRowIndex = dataBaseWorksheet.Range("A" & dataBaseWorksheet.Rows.Count).End(xlUp).Row
+
+    
+
+End Sub
+
+Private Sub btnSaveNewRecord_Click()
+  
+    If CheckUserInputs Then
+
+        AddNewRecord()
+
+    End If
+
+End Sub
+
+Private Function CheckUserInputs()
+    
+   CheckUserInputs = True
+
+   Dim fieldChecker As New clsFieldChecker
+   
+   Dim nameFieldStatus As Boolean
+   nameFieldStatus = fieldChecker.CheckNameField(Me.txtName)
+   
+   If Not nameFieldStatus Then
+    
+        CheckUserInputs = False
+        Exit Function
+       
+   End If
+   
+   Dim dateOfBirthStatus As Boolean
+   dateOfBirthStatus = fieldChecker.CheckDateOfBirth(Me.txtDateOfBirth)
+   
+   If Not dateOfBirthStatus Then
+    
+        CheckUserInputs = False
+        Exit Function
+       
+   End If
+   
+   Dim emailStatus As Boolean
+   emailStatus = fieldChecker.CheckEmail(Me.txtEmail)
+   
+   If Not emailStatus Then
+    
+        CheckUserInputs = False
+        Exit Function
+       
+   End If
+
+End Function
+
+
