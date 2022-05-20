@@ -1,63 +1,51 @@
+Dim choseOption As SearchOption
+Dim reporter As New clsReporter
+
+Enum SearchOption
+    ByName = 1
+    ByCode = 2
+    NotSelected = 3
+End Enum
+
 Private Sub btnQuit_Click()
-    frmAddRecordForm.Hide
+    Me.Hide
 End Sub
 
-Private Sub AddRecord()
+Private Sub SearchRecordsByName()
 
-    Dim dataBaseWorksheet As Worksheet: Set dataBaseWorksheet = Worksheets("Data")
+    Dim arrayList As Object: Set arrayList = CreateObject("System.Collections.ArrayList")
 
-    Dim lastRowIndex As Integer: lastRowIndex = dataBaseWorksheet.Range("A" & dataBaseWorksheet.Rows.Count).End(xlUp).Row
-
+    Dim lastIndex As Integer : lastIndex = utilities.GetLastIndexWithData
     
 
 End Sub
 
-Private Sub btnSaveNewRecord_Click()
-  
-    If CheckUserInputs Then
+Private Sub btnSearch_Click()
+    
+    Select Case choseOption
+        Case SearchOption.ByName
+            SearchRecordsByName
+        Case SearchOption.ByCode
+        
+        Case SearchOption.NotSelected
+            reporter.ReportSearchOptionNotSelected
+    End Select
+     
+End Sub
 
-        AddNewRecord()
-
+Private Sub obSearchByName_Click()
+    If obSearchByName.value = True Then
+        choseOption = SearchOption.ByName
     End If
-
 End Sub
 
-Private Function CheckUserInputs()
-    
-   CheckUserInputs = True
+Private Sub obSearchByCode_Click()
+    If obSearchByCode.value = True Then
+        choseOption = SearchOption.ByCode
+    End If
+End Sub
 
-   Dim fieldChecker As New clsFieldChecker
-   
-   Dim nameFieldStatus As Boolean
-   nameFieldStatus = fieldChecker.CheckNameField(Me.txtName)
-   
-   If Not nameFieldStatus Then
-    
-        CheckUserInputs = False
-        Exit Function
-       
-   End If
-   
-   Dim dateOfBirthStatus As Boolean
-   dateOfBirthStatus = fieldChecker.CheckDateOfBirth(Me.txtDateOfBirth)
-   
-   If Not dateOfBirthStatus Then
-    
-        CheckUserInputs = False
-        Exit Function
-       
-   End If
-   
-   Dim emailStatus As Boolean
-   emailStatus = fieldChecker.CheckEmail(Me.txtEmail)
-   
-   If Not emailStatus Then
-    
-        CheckUserInputs = False
-        Exit Function
-       
-   End If
-
-End Function
-
+Private Sub UserForm_Initialize()
+    choseOption = SearchOption.NotSelected
+End Sub
 
